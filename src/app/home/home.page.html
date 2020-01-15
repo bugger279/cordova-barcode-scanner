@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Ionic 4 QR/Barcode Scanner
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>Scan or generate QR Code</h1>
+
+  <ion-button color="primary" (click)="scanCode()">Scan Code</ion-button>
+  <div *ngIf="scannedData">
+    <p margin-bottom padding-bottom>Scanned Code Text: <b>{{scannedData['text']}}</b></p>
+    <p>Scanned Code Format: <b>{{scannedData['format']}}</b></p>
+  </div>
+
+  <hr>
+
+  <h1>Enter value to create QR code</h1>
+  <ion-input type="text" [(ngModel)]="encodedData"></ion-input>
+  <ion-button color="success" (click)="ecodedData()">Create QR</ion-button>
+</ion-content>
