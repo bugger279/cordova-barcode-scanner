@@ -23,23 +23,33 @@ export class HomePage {
 
   scanCode() {
     this.barcodeScanner
-    .scan()
-    .then(barcodeData => {
-      alert(`Barcode Data ${JSON.stringify(barcodeData)}`);
-      this.scannedData = barcodeData;
-    })
-    .catch(err => {
-      console.log('Error Occurred', err);
-    });
+      .scan()
+      .then(barcodeData => {
+        // alert(`Barcode Data ${JSON.stringify(barcodeData)}`);
+        if (barcodeData.cancelled) {
+          this.scannedData = {
+            text: 'No Data',
+            format: 'No formats found',
+          };
+        } else {
+          this.scannedData = barcodeData;
+        }
+      })
+      .catch(err => {
+        console.log('Error Occurred', err);
+      });
   }
 
   ecodedData() {
     this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, this.ecodedData)
-    .then(encodedData => {
-      console.log(encodedData);
-      this.encodedData = encodedData;
-    })
-    .catch(err => console.log('Error occured: ' + err));
+      .then(
+        encodedData => {
+          console.log(encodedData);
+          this.encodedData = encodedData;
+        },
+        err => {
+          console.log('Error occured: ' + err);
+        });
   }
 
 }
